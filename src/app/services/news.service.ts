@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Article, NewsResponse, ArticlesByCategoryAndPage } from '../explore-container/interfaces/index';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { storedArticlesByCategory } from '../data/mock-news';
 
 const apiKey = environment.apiKey;
 const apiUrl = environment.apiUrl;
@@ -14,7 +15,7 @@ const apiUrl = environment.apiUrl;
 })
 export class NewsService {
 
-  private articlesByCategoryAndPage: ArticlesByCategoryAndPage = {};
+  private articlesByCategoryAndPage: ArticlesByCategoryAndPage = storedArticlesByCategory;
 
   private executeQuery<T>( endpoint: string ) {
     console.log('Petición HTTP realizada');
@@ -30,13 +31,17 @@ export class NewsService {
 
   getTopHeadLines(): Observable<Article[]>{
 
-    return this.getArticlesByCategory('business');
+    // return this.getArticlesByCategory('business');
+    return this.getTopHeadlinesByCategory('business');
     // return this.executeQuery<NewsResponse>(`/top-headlines?category=business`).pipe(
     //   map(({articles}) => articles)
     // );
   }
 
   getTopHeadlinesByCategory(category: string, loadMore: boolean = false): Observable<Article[]>{
+
+    return of(this.articlesByCategoryAndPage[category].articles);
+
      if(loadMore){
        return this.getArticlesByCategory(category);
      }
