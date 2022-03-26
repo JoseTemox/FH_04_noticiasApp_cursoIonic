@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 //Plugins
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
+// import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';

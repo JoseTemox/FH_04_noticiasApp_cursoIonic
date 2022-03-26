@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActionSheetButton, ActionSheetController, Platform } from '@ionic/angular';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
+// import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 import { Article } from '../../explore-container/interfaces/index';
 import { StorageService } from '../../services/storage.service';
@@ -57,10 +58,13 @@ export class ArticleComponent {
     const shareBtn: ActionSheetButton = {
       text: 'Compartir',
       icon: 'share-outline',
-      handler: () => this.onShareArticle()
+      handler: () => {
+        console.log('shared');
+        this.onShareArticle()
+      }
     };
 
-    if(this.platform.is('capacitor')){
+    if(this.platform.is('capacitor') || this.platform.is('ios') || this.platform.is('pwa') || this.platform.is('mobile') || this.platform.is('mobileweb')|| this.platform.is('android') ){
       normalBtns.unshift(shareBtn);
 
     }
